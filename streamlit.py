@@ -12,7 +12,7 @@ import os
 import openai
 
 
-@st.cache
+@st.cache_data
 def return_docs():
     file1 = open('WhatsApp Chat with London Wale 💂.txt', 'r',encoding="utf8")
     Lines = file1.readlines()
@@ -25,7 +25,7 @@ def return_docs():
 
 documents = return_docs()
 
-@st.cache
+@st.cache_resource
 def return_model():
     return SentenceTransformer('bert-base-nli-mean-tokens')
 

@@ -8,7 +8,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 from nltk import sent_tokenize
 
 from sentence_transformers import SentenceTransformer
-
+import os
 import openai
 
 file1 = open('WhatsApp Chat with London Wale 💂.txt', 'r',encoding="utf8")
@@ -49,7 +49,7 @@ vector_data= np.load('embeddings.npy')
 
 def GPT_Completion(texts):
     ## Call the API key under your account (in a secure way)
-    openai.api_key = "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"
+    openai.api_key = os.environ.get('open_ai_key')#"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"
     response = openai.Completion.create(
     engine="text-davinci-003",
     prompt =  texts,

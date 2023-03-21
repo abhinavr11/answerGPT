@@ -11,17 +11,25 @@ from sentence_transformers import SentenceTransformer
 import os
 import openai
 
-file1 = open('WhatsApp Chat with London Wale 💂.txt', 'r',encoding="utf8")
-Lines = file1.readlines()
 
-Lines_new=[]
-for line in Lines:
-  if line != "\n" and len(line)>4:
-    Lines_new.append(line.replace("\n",""))
+@st.cache
+def return_docs():
+    file1 = open('WhatsApp Chat with London Wale 💂.txt', 'r',encoding="utf8")
+    Lines = file1.readlines()
 
-documents = Lines_new
+    Lines_new=[]
+    for line in Lines:
+        if line != "\n" and len(line)>4:
+            Lines_new.append(line.replace("\n",""))
+    return Lines_new
 
-model_emb = SentenceTransformer('bert-base-nli-mean-tokens')
+documents = return_docs()
+
+@st.cache
+def return_model():
+    return SentenceTransformer('bert-base-nli-mean-tokens')
+
+model_emb = return_model()
 
 def generate_context(query, vector_embeddings, k):
     # Although it is not explicitly stated in the official document of sentence transformer, the original BERT is meant for a shorter sentence. We will feed the model by sentences instead of the whole documents.
@@ -49,7 +57,7 @@ vector_data= np.load('embeddings.npy')
 
 def GPT_Completion(texts):
     ## Call the API key under your account (in a secure way)
-    openai.api_key = os.environ.get('open_ai_key')#"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"
+    openai.api_key = os.environ.get('open_ai_key')
     response = openai.Completion.create(
     engine="text-davinci-003",
     prompt =  texts,

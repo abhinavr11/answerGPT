@@ -1,9 +1,9 @@
 import nltk
 nltk.download('punkt')
-import streamlit
 import streamlit as st
 from streamlit_chat import message as st_message
 import numpy as np
+import sklearn
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk import sent_tokenize
 

@@ -46,7 +46,7 @@ def generate_context(query, vector_embeddings, k):
     return final_doc
 
 def getDocs(filename):
-    file1 = open(filename, 'r',encoding="mbcs")
+    file1 = open(filename, 'r',encoding="utf-8")
     Lines = file1.readlines()
     Lines_new=[]
     for line in Lines:

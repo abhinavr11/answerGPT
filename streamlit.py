@@ -125,10 +125,11 @@ def uploader_callback():
         print('Uploaded file #%d' % st.session_state['ctr'])
     
 uploaded_file = st.file_uploader(label="File uploader", on_change=uploader_callback, key="file_uploader")
-with open(uploaded_file.name,"wb") as f: 
-    f.write(uploaded_file.getbuffer()) 
+
 #uploaded_file = st.file_uploader("Choose a file",key="file_upload")#getUploadedFile()   
 if uploaded_file:
+    with open(uploaded_file.name,"wb") as f: 
+        f.write(uploaded_file.getbuffer()) 
     documents = getDocs(uploaded_file.name)
     vector_data = getEmbs(document=documents,name=uploaded_file.name) 
        

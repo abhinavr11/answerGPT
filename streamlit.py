@@ -97,7 +97,7 @@ def generate_answer(name_of_person,vector_data):
     
     user_message = st.session_state.input_text
     query =  user_message  
-    #print(query,"\n \n \n")
+    print(query,"\n \n \n")
     context= generate_context(query, vector_data, 15)
     #print(context, "\n\n\n")
     recipe = f'Given a Whatsapp chat data as "Chat History" reply in the style of the person named {name_of_person} in the chat \n Chat History: {context} \n Query: {query} \n Output:'
@@ -136,8 +136,7 @@ if uploaded_file:
     print('done')
     name_of_person = st.text_input(
     "Enter the name of the person you want the bot to talk like 👇",
-    )  
-    name_of_person = 'Dad'
+    ) 
   
     
     st.text_input("Talk to the bot", key="input_text", on_change=generate_answer,args=(name_of_person,vector_data))
